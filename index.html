@@ -5,10 +5,22 @@
   <title>我的研究項目</title>
   <style>
     ul { list-style: none; padding-left: 1em; }
-    li { cursor: pointer; margin: 4px 0; position: relative; }
+    li { margin: 4px 0; position: relative; }
     .nested { display: none; }
     .active { display: block; }
-    .icon { display: inline-block; width: 1em; text-align: center; margin-right: 0.5em; font-weight: bold; }
+    span[onclick] {
+      pointer-events: none;
+      cursor: default;
+    }
+    .icon {
+      display: inline-block;
+      width: 1em;
+      text-align: center;
+      margin-right: 0.5em;
+      font-weight: bold;
+      pointer-events: all;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
@@ -268,6 +280,7 @@
       </ul>
     </li>
   </ul>
+
   <script>
     function toggle(evt, li) {
       evt.stopPropagation();
@@ -278,6 +291,14 @@
         icon.textContent = nested.classList.contains('active') ? '−' : '+';
       }
     }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      document.querySelectorAll('span.icon').forEach(function (icon) {
+        icon.addEventListener('click', function (e) {
+          toggle(e, icon.parentNode);
+        });
+      });
+    });
   </script>
 </body>
 </html>
