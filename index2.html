@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>我的研究項目</title>
+  <style>
+    ul { 
+      list-style: none; 
+      padding-left: 1em; 
+      font-size-adjust: 0.6; 
+    }
+    li { 
+      margin: 4px 0; 
+      position: relative; 
+      cursor: pointer; 
+    }
+    .nested { 
+      display: none; 
+    }
+    .active { 
+      display: block; 
+    }
+    .icon {
+      display: inline-block;
+      width: 1em;
+      font-size: 1.2em;
+      text-align: center;
+      margin-right: 0.5em;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h2>我的研究項目</h2>
+  <ul>
+    <li onclick="toggle(event, this)">
+      <span class="icon">+</span><span>AWS</span>
+      <ul class="nested">
+        <li onclick="toggle(event, this)">
+          <span class="icon">+</span><span>Athena</span>
+          <ul class="nested">
+            <li>Athena DynamoDB connector for federated queries</li>
+            <li>Athena reuse機制</li>
+            <li>Dynamodb資料匯出讓Athena可以應用的幾種方法整理</li>
+            <li>利用Glue於DynamoDB匯出至S3時建立多個partition並比較差異</li>
+            <li>運用Kinesis Data Firehose 將資料以Parquet格式儲存S3，並比較Athena使用Parquet和JSON格式之差異</li>
+            <li>運用Kinesis data stream實作DynamoDB CDC</li>
+            <li>考慮使用Athena的9點</li>
+          </ul>
+        </li>
+        <li onclick="toggle(event, this)">
+          <span class="icon">+</span><span>CloudFormation</span>
+          <ul class="nested">
+            <li>CD流程用於API Gateway(HTTP API)連接 Lambda Function 以進行 RDS 的 CRUD 操作</li>
+          </ul>
+        </li>
+        <li onclick="toggle(event, this)">
+          <span class="icon">+</span><span>EKS</span>
+          <ul class="nested">
+            <li>EKS連接不同VPC RDS之方法</li>
+            <li>EKS  Fatgate logging實作</li>
+            <li>EKS Add-on</li>
+            <li>EKS 託管式Cluster如何進入其EC2</li>
+            <li>EKS+FluentBit+Kinesis Firehose+EKK(OpenSearch) 傳送 AP log</li>
+            <li>EKS建立Stateful Wordpress應用(RDS)</li>
+            <li>EKS設定X‑ray fault(HTTP回應500)超過80%告警</li>
+            <li>EKS建立ingress與ALB方法(跨Namespace)</li>
+            <li>EKS設定node cpu告警</li>
+            <li>EKS透過建立SecretProviderClass使用Secret Manager(Java)</li>
+            <li>K8s Cluster 服務存取方式</li>
+            <li>RBAC(Role‑based access control)簡介</li>
+            <li>[EKS實作]AWS Load Balancer Controller</li>
+            <li>[EKS實作]EKS簡介與環境安裝</li>
+            <li>[EKS實作]Pod AutoScaler</li>
+            <li>[EKS實作]Prometheus+Grafana應用</li>
+            <li>[EKS實作]在console檢視Kubernetes資源</li>
+            <li>[EKS實作]用eksctl建立第一個EKS Cluster(Fargate)</li>
+            <li>[EKS實作]透過CodeCommit、CodeBuild、CodePipeline、ECR建立EKS CICD流程</li>
+            <li>[EKS實作]利用Container Insights 監控EKS Fargate Metrics</li>
+            <li>[EKS實作]利用Fargate建立一個Pod</li>
+            <li>[EKS實作]利用kubectl建立一Service</li>
+            <li>[EKS實作]如何建立多個App在一個ALB上</li>
+            <li>[K8S]win OS快速安裝kubectl</li>
+            <li>[k8s實作]批次和排程</li>
+            <li>【EKS實作】使用configMap和Secret建立mariadb資料庫</li>
+            <li>【EKS實作】使用configMap和Secret建立wordpress應用</li>
+            <li>建立一fargate pod使用static provisioned EFS persistent volume</li>
+          </ul>
+        </li>
+        <li onclick="toggle(event, this)">
+          <span class="icon">+</span><span>Lambda</span>
+          <ul class="nested">
+            <li>[Java vs C#]Lambda handler 基礎篇</li>
+            <li>[Java]API Gateway X Lambda X DynamoDB起手式</li>
+            <li>[Java]Lambda Send & Recieve Message SQS應用起手式</li>
+            <li>[Java]Lambda寫入DynamoDB起手式insert item</li>
+          </ul>
+        </li>
+        <li onclick="toggle(event, this)">
+          <span class="icon">+</span><span>OpenSearch</span>
+          <ul class="nested">
+            <li>[aoss]Amazon OpenSearch Serverless(Search type)篇</li>
+            <li>[aoss]Amazon OpenSearch Serverless用Kinesis Firehose蒐集AP log資料</li>
+          </ul>
+        </li>
+        <li onclick="toggle(event, this)">
+          <span class="icon">+</span><span>X‑Ray</span>
+          <ul class="nested">
+            <li>X‑Ray觀察fault&amp;Error系列錯誤，大於一定比例發SNS通知</li>
+            <li>[學習筆記]Lambda存取DynamoDB建立X‑ray</li>
+            <li>[實做筆記]X‑Ray整體Trace告警中特別針對某服務，若該服務發出錯誤即產生告警</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li onclick="toggle(event, this)">
+      <span class="icon">+</span><span>Container</span>
+      <ul class="nested">
+        <li>Podman volume</li>
+        <li>Podman應用(二)</li>
+        <li>[實作練習]撰寫一個Dockerfile並執行 (Java spring web application)</li>
+        <li>容器化image如何下Tag</li>
+        <li>容器維運最佳實踐</li>
+        <li>容器化Spring Boot Webservice 設定環境變數 for dev:uat</li>
+      </ul>
+    </li>
+    <li onclick="toggle(event, this)">
+      <span class="icon">+</span><span>K8s</span>
+      <ul class="nested">
+        <li>kubernetes-instance-calculator</li>
+        <li onclick="toggle(event, this)">
+          <span class="icon">+</span><span>minikube</span>
+          <ul class="nested">
+            <li>minikube Image Build</li>
+            <li>minikube實作(安裝篇)</li>
+            <li>minikube建立postgresql db與pgadmin(一)</li>
+            <li>minikube中連接App的方式</li>
+            <li>用Kompose改寫之前container 課程springboot-restful-webservices並布署於minikube</li>
+            <li>建立java hello world應用image並執行於minikube上(一)</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li onclick="toggle(event, this)">
+      <span class="icon">+</span><span>Elastic Search</span>
+      <ul class="nested">
+        <li><span class="icon">+</span><span onclick="toggle(event, this)">Elastic Cloud vs BigQuery 於監控查詢與分析比較</span></li>
+        <li><span class="icon">+</span><span onclick="toggle(event, this)">Elastic Cloud 簡介</span></li>
+        <li onclick="toggle(event, this)">
+          <span class="icon">+</span><span>Elastic cloud 部署建置</span>
+          <ul class="nested">
+            <li>Elastic Cloud如何修改Deployment機器配置</li>
+            <li>Elastic Cloud建置方式之比較</li>
+            <li>Enterprise Search</li>
+            <li>Integrations Server</li>
+            <li>Marketplace建立Elastic Cloud</li>
+            <li>用Terraform建立Elastic Cloud Deployment</li>
+            <li>透過ECK設定安裝Elastic Stack在GKE上</li>
+            <li>Elastic APM簡介</li>
+            <li>Elastic Agent、Fleet、Integration、Policy之關係</li>
+            <li>Elastic Cloud AutoOps介紹</li>
+            <li>Elastic Cloud 監控架構(AP log)建置</li>
+            <li>Elastic Cloud 自動擴展</li>
+            <li>Elastic Cloud 索引生命周期管理(ILM)</li>
+            <li>Elastic Cloud安全性</li>
+            <li>Elastic Cloud權限管理</li>
+            <li>GCE 測試Elastic APM</li>
+            <li>GCP使用PSC連接Elastic Cloud</li>
+            <li>利用APM將Cloud Run trace送至Elastic Cloud</li>
+            <li>利用Elastic Observability監控你的Kubernetes cluster</li>
+          </ul>
+        </li>
+        <li onclick="toggle(event, this)">
+          <span class="icon">+</span><span>備分還原</span>
+          <ul class="nested">
+            <li>Elastic Cloud跨Deployment備分還原index和資料</li>
+            <li>Elastic Search Snapshot排程</li>
+          </ul>
+        </li>
+        <li onclick="toggle(event, this)">
+          <span class="icon">+</span><span>告警機制</span>
+          <ul class="nested">
+            <li>Elastic Cloud Deployment監控與告警機制</li>
+            <li>Elastic Search Alerting</li>
+            <li>使用 Elastic Watcher 配置警報機制，將觸發的日誌內容作為電子郵件的內文發送</li>
+          </ul>
+        </li>
+        <li onclick="toggle(event, this)">
+          <span class="icon">+</span><span>計價與帳務</span>
+          <ul class="nested">
+            <li>Elastic Cloud Billing API</li>
+            <li>Elastic Cloud計價</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li onclick="toggle(event, this)">
+      <span class="icon">+</span><span>GCP</span>
+      <ul class="nested">
+        <li onclick="toggle(event, this)">
+          <span class="icon">+</span><span>Cloud Spanner</span>
+          <ul class="nested">
+            <li>Cloud Spanner Emulator 本機安裝與操作</li>
+            <li>[Java]Spring boot存取cloud spanner emulator</li>
+            <li>運用Cloud Spanner建立股票Web應用程式(emulator)</li>
+          </ul>
+        </li>
+        <li onclick="toggle(event, this)">
+          <span class="icon">+</span><span>CloudRun</span>
+          <ul class="nested">
+            <li>Cloud Run 測試AP僅能使用API更新image版本</li>
+          </ul>
+        </li>
+        <li onclick="toggle(event, this)">
+          <span class="icon">+</span><span>GKE</span>
+          <ul class="nested">
+            <li onclick="toggle(event, this)">
+              <span class="icon">+</span><span>GCP服務串接</span>
+              <ul class="nested">
+                <li>GKE存取Cloud SQL應用(Workload Identity)</li>
+                <li>GKE存取Cloud SQL開發Restful Api應用</li>
+                <li>GKE透過建立SecretProviderClass使用Secret Manager</li>
+              </ul>
+            </li>
+            <li onclick="toggle(event, this)">
+              <span class="icon">+</span><span>GKE和Cloud Storage應用</span>
+              <ul class="nested">
+                <li>Consume a CSI ephemeral storage volume with file caching enabled</li>
+                <li>實作FUSE於GKE以存取Cloud Storage Bucket中的物件資料(FUSE CSI driver)</li>
+                <li>實作FUSE於GKE以存取Cloud Storage Bucket中的物件資料(Static方式)</li>
+              </ul>
+            </li>
+            <li onclick="toggle(event, this)">
+              <span class="icon">+</span><span>LoadBalancer</span>
+              <ul class="nested">
+                <li>Cloud Armor應用(Gateway)</li>
+                <li>GKE Gateway實作</li>
+                <li>GKE ingress 基礎練習</li>
+                <li>Gateway 設定SSL憑證</li>
+                <li>Network endpoint group(NEG)刪除測試</li>
+                <li>使用ALB串聯Cloud Run與GKE服務並建立Cloud Armor Backend security policy</li>
+                <li>使用Gateway+httproute實現GKE服務URL rewrite</li>
+                <li>實作建立Gateway和httproute達成multi-path(使用java springboot context-path)</li>
+              </ul>
+            </li>
+            <li onclick="toggle(event, this)">
+              <span class="icon">+</span><span>Observability</span>
+              <ul class="nested">
+                <li>運用Cloud Monitoring建立GKE基礎Alert</li>
+                <li>使用opensource Prometheus+Alert manager監控微服務是否故障並於Slack workspace通知</li>
+              </ul>
+            </li>
+            <li onclick="toggle(event, this)">
+              <span class="icon">+</span><span>Service Mesh</span>
+              <ul class="nested">
+                <li>利用Service Mesh 實作金絲雀(Canary)布署和A/B Test布署</li>
+                <li>Istio Gateway</li>
+                <li>VirtualService與Destination Rule</li>
+                <li>配置 Anthos GKE 以進行Multi-Cluster Ingress(MCI) 操作</li>
+                <li>實作GKE使用Service Mesh</li>
+                <li>利用Service Mesh建立Security mtls</li>
+              </ul>
+            </li>
+            <li onclick="toggle(event, this)">
+              <span class="icon">+</span><span>建置</span>
+              <ul class="nested">
+                <li>GKE create Job using console</li>
+                <li>GKE建立(Standard mode)</li>
+              </ul>
+            </li>
+            <li onclick="toggle(event, this)">
+              <span class="icon">+</span><span>布署與CICD</span>
+              <ul class="nested">
+                <li>CD To GKE(ADOproxy)</li>
+                <li>CD To GKE</li>
+                <li>Build image 並上傳 Artifact Registry</li>
+                <li>GCP Artifact Registry</li>
+              </ul>
+            </li>
+            <li onclick="toggle(event, this)">
+              <span class="icon">+</span><span>相關比較</span>
+              <ul class="nested">
+                <li>GKE vs EKS比較</li>
+                <li>測試GKE Standard和Autopilot啟動新pod之時間差異</li>
+              </ul>
+            </li>
+            <li onclick="toggle(event, this)">
+              <span class="icon">+</span><span>自動擴展AutoScaling</span>
+              <ul class="nested">
+                <li>GKE pod Bursting</li>
+                <li>sub metrics</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li onclick="toggle(event, this)">
+          <span class="icon">+</span><span>Terraform</span>
+          <ul class="nested">
+            <li>IP 位址管理策略</li>
+            <li>Terraform 建立GKE Standard (透過GKE雲端建置需求調查表)</li>
+            <li>將GKE autopilot建立於現有VPC</li>
+            <li>使用 Terraform 在 GKE 上安裝 ECK</li>
+            <li>使用terraform建立GKE autopilot cluster</li>
+            <li>使用terraform建立GKE standard cluster</li>
+          </ul>
+        </li>
+        <li onclick="toggle(event, this)">
+          <span class="icon">+</span><span>pub:sub</span>
+          <ul class="nested">
+            <li>Pub/Sub Lite研究</li>
+            <li>Pub/Sub with Java Spring程式開發</li>
+            <li>Pub/Sub_ Challenge Lab研究</li>
+            <li>Pub/Sub 可重讀已確認(ACK)之訊息</li>
+            <li>Pub/Sub 研究</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+  <script>
+    function toggle(evt, li) {
+      evt.stopPropagation();
+      const nested = li.querySelector(':scope > .nested');
+      if (nested) {
+        nested.classList.toggle('active');
+        const icon = li.querySelector(':scope > .icon');
+        icon.textContent = nested.classList.contains('active') ? '−' : '+';
+      }
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('span.icon').forEach(function(icon) {
+        icon.addEventListener('click', function(e) {
+          toggle(e, icon.parentNode);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
