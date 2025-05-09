@@ -1,0 +1,402 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Win Automation 2015</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<style type="text/css">
+<!--
+.topmsg { font-family: Arial, Helvetica, sans-serif; font-size: 11px; color: #004b85;}
+.top { font-family: Arial, Helvetica, sans-serif; font-size: 12px; line-height: 18px; color: #0082d1;}
+.plnk { font-family: Arial, Helvetica, sans-serif; font-size: 11px; line-height: 14px; color: #0082d1; text-decoration: none;}
+.plnk:hover { font-family: Arial, Helvetica, sans-serif; font-size: 11px; line-height: 14px; color: #0082d1; text-decoration: underline;}
+.footer {	font-family: Arial, Helvetica, sans-serif; font-size: 11px;	line-height: 18px; color: #FFFFFF; text-decoration: none;}
+.footer:hover { font-family: Arial, Helvetica, sans-serif; font-size: 11px;	line-height: 18px; color: #FFFFFF; text-decoration: underline;}
+.content {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	line-height: 18px;
+	color: #666666;
+	text-decoration: none;
+}
+.footericn { font-family: Arial, Helvetica, sans-serif;	font-size: 11px; line-height: 18px;	color: #0082d1;}
+.footertit { font-family: Arial, Helvetica, sans-serif;	font-size: 14px; line-height: 16px;	color: #0082d1;	font-weight: bold;}
+.tiltle { font-family: Arial, Helvetica, sans-serif; font-size: 18px; line-height: 24px; color: #072e67;}
+.tab01 { border-right-width: 1px; border-left-width: 1px; border-right-style: solid;	border-left-style: solid; border-right-color: #d3d7d9; border-left-color: #d3d7d9; background-color: #fafbfb;}
+.ptit {	font-family: Arial, Helvetica, sans-serif; font-size: 12px;	line-height: 18px; font-weight: bold; color: #FFFFFF;}
+.pcont { font-family: Arial, Helvetica, sans-serif;	font-size: 11px; line-height: 14px; color: #666666;}
+.picn {	font-family: Arial, Helvetica, sans-serif; font-size: 11px; line-height: 14px; color: #0082d1;}
+.tab02 { border-right-width: 1px; border-left-width: 1px; border-right-style: solid; border-left-style: solid; border-right-color: #d3d7d9;	border-left-color: #d3d7d9;	background-color: #fafbfb;}
+.pcont1 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	line-height: 14px;
+	color: #FFF;
+}
+.picnbold { font-family: Arial, Helvetica, sans-serif; font-size: 11px;	line-height: 14px; color: #333; font-weight: bold;}
+.icontxt {font-family: Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	line-height: 11px;
+	color: #042747;
+	text-decoration: none;
+	font-weight: bold;
+}
+.icontxt {	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	line-height: 11px;
+	color: #042747;
+	text-decoration: none;
+	font-weight: bold;
+}
+.d1 {	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	color: #072e67;
+}
+.top1 {	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #0082d1;
+	text-decoration: none;
+}
+.p1 {
+	font-size: 16px;
+	font-weight: normal;
+	color: #084076;
+	text-decoration: none;
+	font-family: Arial, Helvetica, sans-serif;
+}
+.p1 {
+	font-size: 12px;
+	font-weight: bold;
+	color: #084076;
+	font-family: Arial, Helvetica, sans-serif;
+}
+.tableColor01 {font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	line-height: 22px;
+	font-weight: bold;
+	color: #084076;
+	text-decoration: none;
+	background-color: #dedede;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #FFFFFF;
+	border-left-width: 1px;
+	border-left-style: solid;
+	border-left-color: #FFFFFF;
+	padding: 3px;
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #FFFFFF;
+}
+.tableColor01B {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	line-height: 22px;
+	font-weight: bold;
+	color: #084076;
+	text-decoration: none;
+	background-color: #F4F4F4;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #A7A7A7;
+	border-left-width: 1px;
+	border-left-style: solid;
+	border-left-color: #FFFFFF;
+	padding: 3px;
+	border-right-width: 4px;
+	border-right-style: solid;
+	border-right-color: #FFFFFF;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #A7A7A7;
+	text-align: center;
+}
+.tableColor02 {padding: 3px;
+	background-color: #e6f2fa;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #FFFFFF;
+	border-left-width: 1px;
+	border-left-style: solid;
+	border-left-color: #FFFFFF;
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #FFFFFF;
+}
+.tableColor03 {
+	padding: 3px;
+	background-color: #F4F4F4;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #A7A7A7;
+	border-right-width: 4px;
+	border-right-style: solid;
+	border-right-color: #FFFFFF;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	line-height: 14px;
+	color: #084076;
+	border-top-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-left-style: solid;
+	border-top-color: #A7A7A7;
+	border-left-color: #FFFFFF;
+}
+.tableColor03B {
+	padding: 3px;
+	background-color: #F4F4F4;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #A7A7A7;
+	border-right-width: 4px;
+	border-right-style: solid;
+	border-right-color: #FFFFFF;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	line-height: 14px;
+	color: #636363;
+	border-top-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-left-style: solid;
+	border-top-color: #A7A7A7;
+	border-left-color: #FFFFFF;
+}
+.tableColor04 {
+	background-color: #FFFFFF;
+	padding: 3px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-right-color: #FFFFFF;
+	border-bottom-color: #FFFFFF;
+	border-left-color: #FFFFFF;
+}
+.tabletxt {font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	line-height: 14px;
+	color: #636363;
+	text-decoration: none;
+}
+.p11 {	font-size: 16px;
+	font-weight: normal;
+	color: #084076;
+	text-decoration: none;
+	font-family: Arial, Helvetica, sans-serif;
+}
+.p11 {	font-size: 12px;
+	font-weight: bold;
+	color: #084076;
+	font-family: Arial, Helvetica, sans-serif;
+}
+.tableColor011 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	line-height: 22px;
+	font-weight: bold;
+	color: #084076;
+	text-decoration: none;
+	background-color: #dedede;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #FFFFFF;
+	border-left-width: 1px;
+	border-left-style: solid;
+	border-left-color: #FFFFFF;
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #FFFFFF;
+	padding-top: 3px;
+	padding-bottom: 3px;
+}
+.tableColor021 {
+	background-color: #e6f2fa;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #FFFFFF;
+	border-left-width: 1px;
+	border-left-style: solid;
+	border-left-color: #FFFFFF;
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #FFFFFF;
+	text-decoration: none;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	line-height: 14px;
+	color: #636363;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	padding-right: 2px;
+	padding-left: 2px;
+}
+.tableColor031 {
+	background-color: #b4d2eb;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #FFFFFF;
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #FFFFFF;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	line-height: 14px;
+	color: #084076;
+	text-decoration: none;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	padding-right: 2px;
+	padding-left: 1px;
+}
+.tableColor041 {
+	background-color: #c8e0f3;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #FFFFFF;
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #FFFFFF;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	line-height: 14px;
+	color: #084076;
+	text-decoration: none;
+	padding-top: 3px;
+	padding-bottom: 3px;
+}
+.content2 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	line-height: 18px;
+	color: #666666;
+	text-decoration: none;
+}
+.content2:hover {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	line-height: 18px;
+	color: #2B9B0C;
+}
+.footertit1 {	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	line-height: 18px;
+	color: #0082d1;
+	font-weight: bold;
+}
+.pcont11 {font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	line-height: 12px;
+	color: #666666;
+}
+.Product {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	color: #FFFFFF;
+	font-weight: bold;
+}
+.style5 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+	color: #5989C0;
+}
+.Subtitle1 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+}
+.ending_link {font-family: Arial, Helvetica, sans-serif; font-size: 11px; line-height: 14px; color: #0082d1; text-decoration: underline;}
+.style38 {color: #084076}
+.style39 {background-color: #FFFFFF; padding: 3px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; border-right-color: #FFFFFF; border-bottom-color: #FFFFFF; border-left-color: #FFFFFF; color: #084076; }
+sup{
+	vertical-align: baseline;
+	position: relative;
+	top: -0.5em;
+} 
+.tableColor01BT {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	line-height: 22px;
+	font-weight: bold;
+	color: #084076;
+	text-decoration: none;
+}
+.tableColor01BT:hover {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	line-height: 22px;
+	font-weight: bold;
+	color: #FF6600;
+	text-decoration: none;
+}
+.tabletxt tr .tableColor01B table {
+	text-align: center;
+}
+.contact {font-size: 14;
+}
+-->
+</style>
+</head>
+
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" bgcolor="#b4d2eb">
+<table width="750" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td height="40" align="center" class="topmsg">If you're having trouble viewing this email, you may see it <a href="index.htm" class="topmsg">online</a>.</td>
+  </tr>
+  <tr>
+    <td><table width="750" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">
+
+      <tr>
+        <td width="750" height="56" align="center" valign="bottom"><table width="730" border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td width="205"><a href="http://www.advantech.com/eautomation/" target="_blank"><img src="img/logo_automation.gif" width="128" height="27" border="0" ></a></td>
+            <td width="525" align="right" valign="middle"><table border="0" cellpadding="5" cellspacing="0">
+                <tr>
+            
+                <td width="34"><img src="img/icn_email.gif" width="39" height="25" alt=""></td>
+                <td align="left" valign="bottom" class="top"><strong>Mail</strong>:  | <span class="contact">ia.csf@advantech.com</span></td>
+                  <td width="34" align="center" valign="middle"><img src="img/icn_hotline.gif" width="34" height="31" border="0" style="display:block; vertical-align:top;"/></td>
+                  <td align="left" valign="bottom" class="top"><strong>TEL</strong>:  | <span class="contact">90 444 3 093</span></td>
+                 <td width="34" align="left" valign="bottom"><a href="https://www.facebook.com/events/909456785752721" target="_blank"><img src="img/fblogo.png" width="34" height="34"  alt="fb" border="0"></a></td>                     
+               <td><a href="http://www.advantech.com.tw/partner/partner_admin/default.aspx" target="_blank"><img src="img/Alitek_Logo_CYMK_02.jpg" width="35" height="34" alt="Alitek" border="0"></a></td> 
+                </tr>
+            </table></td>
+          </tr>
+        </table></td>
+      </tr>
+
+      <tr>
+        <td height="340" align="left" valign="top"><a href="http://alitek.advantech.com/" target="_blank"><img src="img/Win2015_Banner_White_Adv5.jpg" width="750" height="701" usemap="#Map" border="0" ></a>
+          <map name="Map">
+            <area shape="rect" coords="14,529,319,590" href="http://member.advantech.com/yourcontactinformation.aspx?formid=adfca4d2-3511-4437-9683-ce849ff4c1ce&urlid=84cdea3e-aba1-4d7d-97f8-b57e7cc613c3&utm_campaign=Report&utm_medium=Unica-sent-eDM&utm_source=Unica-sent-eDM" target="_blank">
+            <area shape="poly" coords="746,5,6,5,7,525,326,526,328,589,329,610,747,614" href="http://alitek.advantech.com/" target="_blank">
+          </map>
+        </td>
+      </tr>
+      <tr>
+        <td align="left" valign="top"><table width="750" border="0" cellpadding="0" cellspacing="0">
+
+          </table></td>
+      </tr>
+
+
+      <tr>
+        <td height="35" align="left" valign="middle" bgcolor="#87909a"><table width="732" cellpadding="0" cellspacing="0">
+          <tr>
+            <td width="17" align="left" valign="middle"></td>
+            <td width="508" align="left" valign="middle" class="footer">Copyright &copy; 1983-2015 Advantech Co., Ltd. All Rights Reserved. </td>
+            <td width="102" align="left" valign="middle" class="footer">><a href="http://www.advantech.com/privacy.asp" target="_blank" class="footer">Privacy Policy</a></td>
+            <td align="left" valign="middle" class="footer">><a href="http://www.advantech.com.tw/rss/" target="_blank" class="footer">Advantech RSS</a></td>
+          </tr>
+        </table></td>
+      </tr>
+
+    </table></td>
+  </tr>
+</table>
+</body>
+</html>
