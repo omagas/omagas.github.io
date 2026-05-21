@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>台股雲霄飛車模擬器</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #1a1a1a;
+            color: #ffffff;
+            padding: 50px;
+        }
+        .status-container {
+            font-size: 4rem;
+            font-weight: bold;
+            margin: 20px;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        /* 1. 台股大漲改為紅色 */
+        .bull-market {
+            color: #ff3b30; 
+            background-color: rgba(255, 59, 48, 0.1);
+            animation: pulse 1.5s infinite;
+        }
+        /* 2. 台股大跌改為綠色 */
+        .bear-market {
+            color: #34c759; 
+            background-color: rgba(52, 199, 89, 0.1);
+        }
+        .btn {
+            padding: 12px 24px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            margin: 10px;
+            background-color: #007aff;
+            color: white;
+            transition: 0.3s;
+        }
+        .btn:hover { background-color: #0056b3; }
+        
+        /* 3 & 4. 信件視窗樣式 */
+        #email-box {
+            display: none;
+            max-width: 500px;
+            margin: 30px auto;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: left;
+            transition: all 0.5s ease;
+        }
+        /* 大漲時的離職信外觀（紅） */
+        .resignation-style {
+            border: 2px solid #ff3b30;
+            background-color: #2c2c2e;
+            box-shadow: 0px 0px 20px rgba(255, 59, 48, 0.5);
+        }
+        /* 大跌時的道歉信外觀（綠） */
+        .apology-style {
+            border: 2px solid #34c759;
+            background-color: #1c2e24;
+            box-shadow: 0px 0px 20px rgba(52, 199, 89, 0.5);
+        }
+        .action-btn {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+            color: white;
+        }
+        .bg-red { background-color: #ff3b30; }
+        .bg-red:hover { background-color: #cc2e24; }
+        .bg-green { background-color: #34c759; }
+        .bg-green:hover { background-color: #28a745; }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>📈 財富自由 / 認命加班 模擬器 📉</h1>
+    
+    <button class="btn" onclick="goUp()">模擬大漲</button>
+    <button class="btn" onclick="goDown()">模擬大跌</button>
+
+    <div id="market-status" class="status-container">請選擇市場走勢</div>
+
+    <!-- 動態信件區塊 -->
+    <div id="email-box">
+        <div id="email-content"></div>
+    </div>
+
+    <script>
+        const statusDiv = document.getElementById('market-status');
+        const emailBox = document.getElementById('email-box');
+
+        // 1. 大漲情境（紅色）：跳出離職信
+        function goUp() {
+            statusDiv.innerHTML = "▲ 台股大漲 1000 點！全線飄紅！ 🚀";
+            statusDiv.className = "status-container bull-market";
+            
+            // 切換為離職信內容與樣式
+            emailBox.style.display = "block";
+            emailBox.className = "resignation-style";
+            emailBox.innerHTML = `
+                <h3>📩 預約發送：離職信</h3>
+                <p><strong>收件人：</strong> 討厭的主管、老闆</p>
+                <p><strong>主旨：</strong> 本人不幹了！世界那麼大，我想去看看</p>
+                <hr style="border-color: #444;">
+                <p>內容：由於台股今日大漲，本人已達財務自由（歐印賺爛）。特此通知，老子今天開始正式離職，電話已關機，請勿打擾。</p>
+                <button class="action-btn bg-red" onclick="clickSendEmail()">滑鼠點擊：確認寄出離職信 🚀</button>
+            `;
+        }
+
+        // 2 & 4. 大跌情境（綠色）：強制收回離職信，改發道歉文
+        function goDown() {
+            statusDiv.innerHTML = "▼ 台股大跌 1000 點！慘綠一片！ 😭";
+            statusDiv.className = "status-container bear-market";
+            
+            // 切換為道歉信內容與樣式
+            emailBox.style.display = "block";
+            emailBox.className = "apology-style";
+            emailBox.innerHTML = `
+                <h3 style="color: #34c759;">🚨 系統：已緊急攔截並收回離職信！</h3>
+                <h3>📩 重新擬定：認錯道歉文</h3>
+                <p><strong>收件人：</strong> 最親愛、最尊敬的英明主管</p>
+                <p><strong>主旨：</strong> 關於稍早系統誤發信件之誠懇致歉與加班申請</p>
+                <hr style="border-color: #444;">
+                <p style="color: #d1d1d6;">內容：主管您好，剛才我的電腦不幸中毒，自動發出了荒謬的離職信，請您千萬不要當真！我熱愛公司、熱愛工作，主管您就像我的再生父母。為了表達歉意，我自願申請今晚加班到午夜，這輩子死是公司的魂，活是公司的人！</p>
+                <button class="action-btn bg-green" onclick="clickSendApology()">滑鼠點擊：跪求發送道歉文 🙇‍♂️</button>
+            `;
+        }
+
+        // 3. 點擊寄出離職信
+        function clickSendEmail() {
+            alert("咻ーー！離職信已成功寄出！恭喜你登出奴隸市場！🎉");
+            emailBox.innerHTML = "<h2 style='color:#ff3b30; text-align:center;'>📧 信件已送出！收拾行李準備退群組吧！</h2>";
+        }
+
+        // 4. 點擊發送道歉文
+        function clickSendApology() {
+            alert("發送成功！主管回覆：『下次注意點，晚上順便把報表做完。』乖乖留下來加班吧... QQ");
+            emailBox.innerHTML = "<h2 style='color:#34c759; text-align:center;'>🙇‍♂️ 道歉信已送出！認命開工，晚餐記得叫外送。</h2>";
+        }
+    </script>
+
+</body>
+</html>
