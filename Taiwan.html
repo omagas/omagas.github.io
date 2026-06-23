@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>守護Taiwan 愛築積</title>
+<style>
+  :root{
+    --olive:#7c9a3a;
+    --olive-dark:#5f7a2a;
+    --gold:#c9a84c;
+    --brown:#6b4a2b;
+    --cream:#f3ead9;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;}
+  body{background:var(--cream);color:#3a3a2a;}
+
+  header{
+    background:var(--olive);
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:18px 40px;
+  }
+  header .logo{font-size:22px;font-weight:bold;}
+  header .logo span{color:var(--gold);}
+  nav{display:flex;gap:36px;}
+  nav a{color:#fff;text-decoration:none;font-size:15px;padding-bottom:6px;}
+  nav a.active{color:var(--gold);border-bottom:2px solid var(--gold);}
+
+  .hero{
+    position:relative;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    padding:60px 60px 30px;
+    overflow:hidden;
+  }
+  .hero-text{max-width:520px;z-index:2;}
+  .hero-text .sub{color:var(--brown);font-weight:bold;margin-bottom:14px;}
+  .hero-text h1{
+    font-size:48px;
+    line-height:1.25;
+    color:var(--olive-dark);
+    font-weight:900;
+  }
+  .hero-text .since{
+    margin-top:16px;
+    letter-spacing:2px;
+    color:var(--brown);
+    font-weight:bold;
+  }
+  .hero-text h2{
+    margin-top:36px;
+    font-size:22px;
+    color:#3a3a2a;
+  }
+  .hero-text p{
+    margin-top:14px;
+    line-height:1.9;
+    font-size:14px;
+    color:#555;
+  }
+
+  .map-wrap{
+    position:relative;
+    width:560px;
+    flex-shrink:0;
+    z-index:2;
+  }
+  .map-wrap svg{width:100%;height:auto;display:block;overflow:visible;}
+
+  .map-base{
+    pointer-events:none;
+    filter:brightness(.76) saturate(.78);
+  }
+  .region-img{
+    opacity:0;
+    pointer-events:none;
+    transform-box:fill-box;
+    transform-origin:center;
+    transition:opacity .12s ease, transform .25s ease, filter .25s ease;
+    will-change:transform;
+  }
+  .region-img image{
+    filter:none;
+  }
+  .region:hover .region-img{
+    opacity:1;
+    transform:translateY(-16px) scale(1.045);
+    filter:drop-shadow(0 24px 18px rgba(0,0,0,.62)) brightness(1.18) saturate(1.12);
+  }
+  .region .hit{
+    fill:transparent;
+    stroke:none;
+    cursor:pointer;
+    pointer-events:all;
+  }
+
+  .tooltip{
+    position:absolute;
+    transform:translate(-50%,-120%);
+    background:rgba(60,40,20,.92);
+    color:#fff;
+    padding:10px 16px;
+    border-radius:8px;
+    font-size:13px;
+    line-height:1.6;
+    white-space:nowrap;
+    pointer-events:none;
+    opacity:0;
+    transition:opacity .15s ease;
+    z-index:10;
+  }
+  .tooltip.show{opacity:1;}
+  .tooltip b{color:var(--gold);font-size:15px;}
+  .tooltip:after{
+    content:"";
+    position:absolute;
+    left:50%;
+    bottom:-6px;
+    transform:translateX(-50%);
+    border:6px solid transparent;
+    border-top-color:rgba(60,40,20,.92);
+  }
+
+  .center-badge{
+    position:absolute;
+    text-align:center;
+    color:#fff;
+    font-size:11px;
+    line-height:1.5;
+    pointer-events:none;
+    text-shadow:0 1px 3px rgba(0,0,0,.6);
+  }
+  .center-badge b{font-size:16px;color:var(--gold);}
+
+  .stats{
+    display:flex;
+    gap:48px;
+    padding:60px 60px 80px;
+    flex-wrap:wrap;
+  }
+  .stat .stat-label{
+    font-weight:bold;
+    margin-bottom:14px;
+    color:#3a3a2a;
+  }
+  .bar{
+    position:relative;
+    display:flex;
+    width:280px;
+    height:48px;
+    border-radius:6px;
+    overflow:hidden;
+    background:#fff;
+    box-shadow:0 6px 10px rgba(0,0,0,.15);
+  }
+  .bar:before{
+    content:"";
+    position:absolute;
+    inset:0 auto 0 0;
+    width:0;
+    background:var(--bar-color);
+    transition:width .9s cubic-bezier(0.16,1,0.3,1);
+    z-index:0;
+  }
+  .bar .fill{
+    position:relative;
+    z-index:1;
+    flex:0 0 70%;
+    display:flex;
+    align-items:center;
+    padding-left:16px;
+    font-size:26px;
+    font-weight:900;
+    color:#3a3a2a;
+    transition:color .2s ease;
+  }
+  .bar .blank{flex:1;}
+  .bar.green{--bar-color:var(--olive);}
+  .bar.olive2{--bar-color:#7a6a3a;}
+  .bar.brown{--bar-color:#6b2e1f;}
+  .bar .fill small{font-size:14px;margin-left:4px;}
+
+  .bar:hover:before{
+    width:70%;
+  }
+  .bar:hover .fill{
+    color:#fff;
+  }
+
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">守護<span>Taiwan</span> 愛築積</div>
+  <nav>
+    <a href="#" class="active">首頁</a>
+    <a href="#">故事館</a>
+    <a href="#">社福太陽能</a>
+    <a href="#">未來展望</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-text">
+    <div class="sub">台積電慈善基金會 - 公益愛築積計劃</div>
+    <h1>守護全Taiwan<br>綠能愛築積</h1>
+    <div class="since">Since 2020</div>
+    <h2>綠能再生 讓愛在全台發光</h2>
+    <p>
+      「愛築積公益綠能」計畫，自許在能源轉型之際，透過捐贈
+      社福機構及偏鄉學校搭建太陽能板與汰換LED燈具，引領企
+      業潮流，逐步遍地開花至全世界，並可望讓全世界看到台灣
+      這項近年獨創、最具規模的「公益綠能」模式，如同台積電
+      慈善基金會董事長張淑芬的盼望，「讓傳遞愛無國界」。
+    </p>
+  </div>
+
+  <div class="map-wrap" id="mapWrap">
+    <svg viewBox="0 0 941 802" id="taiwanMap">
+      <defs>
+        <clipPath id="clip-r0"><polygon points="284,9 275,16 267,16 245,9 232,0 227,7 204,17 194,16 166,27 151,27 149,19 140,13 117,25 86,25 66,39 62,62 169,141"/></clipPath>
+        <clipPath id="clip-r1"><polygon points="296,8 283,11 171,139 171,147 259,190 294,63 291,58 291,45 296,35"/></clipPath>
+        <clipPath id="clip-r2"><polygon points="62,63 65,70 64,88 51,97 48,110 15,157 16,190 27,206 29,220 35,225 46,253 63,263 57,275 131,228 169,148 167,140"/></clipPath>
+        <clipPath id="clip-r3"><polygon points="170,147 133,229 274,282 292,282 310,266 258,190"/></clipPath>
+        <clipPath id="clip-r4"><polygon points="294,64 260,191 311,265 410,243 456,191 449,175 443,175 436,162 417,147 416,130 407,127 405,115 390,108 388,103 366,102 333,89 324,78 311,79"/></clipPath>
+        <clipPath id="clip-r5"><polygon points="60,321 80,348 84,368 273,282 131,229 57,276 58,301 62,310"/></clipPath>
+        <clipPath id="clip-r6"><polygon points="291,283 274,283 85,368 98,397 95,406 100,418 107,420 108,425 267,420"/></clipPath>
+        <clipPath id="clip-r7"><polygon points="410,244 314,265 292,283 268,421 302,460 448,427"/></clipPath>
+        <clipPath id="clip-r8"><polygon points="457,190 411,243 449,427 486,455 572,450 650,384 553,300 534,277 517,269 508,249 484,245 474,237 474,226 457,215"/></clipPath>
+        <clipPath id="clip-r9"><polygon points="103,427 106,431 118,431 120,462 129,476 138,474 141,495 148,507 155,507 159,513 155,538 159,541 156,553 173,563 174,572 188,571 201,593 210,593 214,600 233,607 235,618 248,613 254,623 259,621 271,628 284,604 302,462 267,421"/></clipPath>
+        <clipPath id="clip-r10"><polygon points="486,456 451,429 444,428 303,461 284,606 455,548"/></clipPath>
+        <clipPath id="clip-r11"><polygon points="513,733 519,695 455,549 286,606 272,627 280,631 281,644 290,649 295,660 313,667 308,672 317,681 336,686 336,701 344,703 345,709 401,703 444,718 457,716 456,722"/></clipPath>
+        <clipPath id="clip-r12"><polygon points="571,451 487,456 456,547 520,696 614,582"/></clipPath>
+        <clipPath id="clip-r13"><polygon points="650,385 572,451 614,581 769,612 759,602 763,551 758,549 757,540 744,535 744,513 733,487 718,468 718,448 691,436 673,413 672,405"/></clipPath>
+        <clipPath id="clip-r14"><polygon points="513,734 528,737 536,749 597,757 642,747 753,746 832,768 851,788 874,791 887,801 898,801 894,787 940,782 915,774 917,768 940,768 940,755 916,749 908,726 816,674 769,613 617,583 520,697"/></clipPath>
+      </defs>
+
+      <image class="map-base" href="taiwan01.png" x="0" y="0" width="941" height="802"/>
+
+      <g class="region" data-name="台北市" data-sites="6" data-orgs="14">
+        <g class="region-img" clip-path="url(#clip-r0)" style="transform-origin:178.5px 27.5px;">
+          <image href="taiwan01.png" x="0" y="0" width="941" height="802"/>
+        </g>
+        <polygon class="hit" points="284,9 275,16 267,16 245,9 232,0 227,7 204,17 194,16 166,27 151,27 149,19 140,13 117,25 86,25 66,39 62,62 169,141"/>
+      </g>
+
+      <g class="region" data-name="新北市" data-sites="8" data-orgs="20">
+        <g class="region-img" clip-path="url(#clip-r1)" style="transform-origin:261.3px 77.3px;">
+          <image href="taiwan01.png" x="0" y="0" width="941" height="802"/>
+        </g>
+        <polygon class="hit" points="296,8 283,11 171,139 171,147 259,190 294,63 291,58 291,45 296,35"/>
+      </g>
+
+      <g class="region" data-name="桃園市" data-sites="4" data-orgs="9">
+        <g class="region-img" clip-path="url(#clip-r2)" style="transform-origin:65.3px 170.8px;">
+          <image href="taiwan01.png" x="0" y="0" width="941" height="802"/>
+        </g>
+        <polygon class="hit" points="62,63 65,70 64,88 51,97 48,110 15,157 16,190 27,206 29,220 35,225 46,253 63,263 57,275 131,228 169,148 167,140"/>
+      </g>
+
+      <g class="region" data-name="新竹縣" data-sites="3" data-orgs="7">
+        <g class="region-img" clip-path="url(#clip-r3)" style="transform-origin:239.5px 232.7px;">
+          <image href="taiwan01.png" x="0" y="0" width="941" height="802"/>
+        </g>
+        <polygon class="hit" points="170,147 133,229 274,282 292,282 310,266 258,190"/>
+      </g>
+
+      <g class="region" data-name="宜蘭縣" data-sites="2" data-orgs="5">
+        <g class="region-img" clip-path="url(#clip-r4)" style="transform-origin:378.7px 141.3px;">
+          <image href="taiwan01.png" x="0" y="0" width="941" height="802"/>
+        </g>
+        <polygon class="hit" points="294,64 260,191 311,265 410,243 456,191 449,175 443,175 436,162 417,147 416,130 407,127 405,115 390,108 388,103 366,102 333,89 324,78 311,79"/>
+      </g>
+
+      <g class="region" data-name="苗栗縣" data-sites="3" data-orgs="6">
+        <g class="region-img" clip-path="url(#clip-r5)" style="transform-origin:100.6px 304.4px;">
+          <image href="taiwan01.png" x="0" y="0" width="941" height="802"/>
+        </g>
+        <polygon class="hit" points="60,321 80,348 84,368 273,282 131,229 57,276 58,301 62,310"/>
+      </g>
+
+      <g class="region" data-name="台中市" data-sites="6" data-orgs="14">
+        <g class="region-img" clip-path="url(#clip-r6)" style="transform-origin:158.3px 380.0px;">
+          <image href="taiwan01.png" x="0" y="0" width="941" height="802"/>
+        </g>
+        <polygon class="hit" points="291,283 274,283 85,368 98,397 95,406 100,418 107,420 108,425 267,420"/>
+      </g>
+
+      <g class="region" data-name="南投縣" data-sites="3" data-orgs="6">
+        <g class="region-img" clip-path="url(#clip-r7)" style="transform-origin:339.0px 350.0px;">
+          <image href="taiwan01.png" x="0" y="0" width="941" height="802"/>
+        </g>
+        <polygon class="hit" points="410,244 314,265 292,283 268,421 302,460 448,427"/>
+      </g>
+
+      <g class="region" data-name="花蓮縣" data-sites="3" data-orgs="6">
+        <g class="region-img" clip-path="url(#clip-r8)" style="transform-origin:501.9px 297.6px;">
+          <image href="taiwan01.png" x="0" y="0" width="941" height="802"/>
+        </g>
+        <polygon class="hit" points="457,190 411,243 449,427 486,455 572,450 650,384 553,300 534,277 517,269 508,249 484,245 474,237 474,226 457,215"/>
+      </g>
+
+      <g class="region" data-name="彰化縣" data-sites="3" data-orgs="6">
+        <g class="region-img" clip-path="url(#clip-r9)" style="transform-origin:189.3px 537.3px;">
+          <image href="taiwan01.png" x="0" y="0" width="941" height="802"/>
+        </g>
+        <polygon class="hit" points="103,427 106,431 118,431 120,462 129,476 138,474 141,495 148,507 155,507 159,513 155,538 159,541 156,553 173,563 174,572 188,571 201,593 210,593 214,600 233,607 235,618 248,613 254,623 259,621 271,628 284,604 302,462 267,421"/>
+      </g>
+
+      <g class="region" data-name="嘉義縣" data-sites="3" data-orgs="6">
+        <g class="region-img" clip-path="url(#clip-r10)" style="transform-origin:403.8px 488.0px;">
+          <image href="taiwan01.png" x="0" y="0" width="941" height="802"/>
+        </g>
+        <polygon class="hit" points="486,456 451,429 444,428 303,461 284,606 455,548"/>
+      </g>
+
+      <g class="region" data-name="台南市" data-sites="5" data-orgs="12">
+        <g class="region-img" clip-path="url(#clip-r11)" style="transform-origin:362.4px 673.6px;">
+          <image href="taiwan01.png" x="0" y="0" width="941" height="802"/>
+        </g>
+        <polygon class="hit" points="513,733 519,695 455,549 286,606 272,627 280,631 281,644 290,649 295,660 313,667 308,672 317,681 336,686 336,701 344,703 345,709 401,703 444,718 457,716 456,722"/>
+      </g>
+
+      <g class="region" data-name="高雄市" data-sites="5" data-orgs="13">
+        <g class="region-img" clip-path="url(#clip-r12)" style="transform-origin:529.6px 546.4px;">
+          <image href="taiwan01.png" x="0" y="0" width="941" height="802"/>
+        </g>
+        <polygon class="hit" points="571,451 487,456 456,547 520,696 614,582"/>
+      </g>
+
+      <g class="region" data-name="台東縣" data-sites="2" data-orgs="5">
+        <g class="region-img" clip-path="url(#clip-r13)" style="transform-origin:708.4px 498.5px;">
+          <image href="taiwan01.png" x="0" y="0" width="941" height="802"/>
+        </g>
+        <polygon class="hit" points="650,385 572,451 614,581 769,612 759,602 763,551 758,549 757,540 744,535 744,513 733,487 718,468 718,448 691,436 673,413 672,405"/>
+      </g>
+
+      <g class="region" data-name="屏東縣" data-sites="3" data-orgs="6">
+        <g class="region-img" clip-path="url(#clip-r14)" style="transform-origin:782.7px 743.3px;">
+          <image href="taiwan01.png" x="0" y="0" width="941" height="802"/>
+        </g>
+        <polygon class="hit" points="513,734 528,737 536,749 597,757 642,747 753,746 832,768 851,788 874,791 887,801 898,801 894,787 940,782 915,774 917,768 940,768 940,755 916,749 908,726 816,674 769,613 617,583 520,697"/>
+      </g>
+    </svg>
+
+    <div class="center-badge" style="left:53%;top:50%;">
+      <div><b id="totalSites">55</b>個<br>場域建置</div>
+      <div style="margin-top:6px;"><b id="totalOrgs">145</b>個<br>被幫助機構</div>
+    </div>
+
+    <div class="tooltip" id="tooltip"></div>
+  </div>
+</section>
+
+<section class="stats">
+  <div class="stat">
+    <div class="stat-label">全台已建置發電量 ☀️</div>
+    <div class="bar green"><div class="fill">5886<small>kW</small></div><div class="blank"></div></div>
+  </div>
+  <div class="stat">
+    <div class="stat-label">全台點亮LED數量 💡</div>
+    <div class="bar olive2"><div class="fill">5886<small>kW</small></div><div class="blank"></div></div>
+  </div>
+  <div class="stat">
+    <div class="stat-label">全台已建置場域 📍</div>
+    <div class="bar brown"><div class="fill">356<small>個</small></div><div class="blank"></div></div>
+  </div>
+</section>
+
+<script>
+  const wrap = document.getElementById('mapWrap');
+  const map = document.getElementById('taiwanMap');
+  const tooltip = document.getElementById('tooltip');
+  const regions = document.querySelectorAll('.region');
+
+  regions.forEach(region => {
+    region.addEventListener('mouseenter', () => {
+      map.appendChild(region);
+    });
+    region.addEventListener('mousemove', (e) => {
+      const name = region.dataset.name;
+      const sites = region.dataset.sites;
+      const orgs = region.dataset.orgs;
+      tooltip.innerHTML = `<b>${name}</b><br>${sites} 個場域建置<br>${orgs} 個被幫助機構`;
+      const rect = wrap.getBoundingClientRect();
+      tooltip.style.left = (e.clientX - rect.left) + 'px';
+      tooltip.style.top = (e.clientY - rect.top) + 'px';
+      tooltip.classList.add('show');
+    });
+    region.addEventListener('mouseleave', () => {
+      tooltip.classList.remove('show');
+    });
+  });
+</script>
+
+</body>
+</html>
