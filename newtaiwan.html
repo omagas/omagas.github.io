@@ -86,7 +86,7 @@
   .region-img image{
     filter:none;
   }
-  .region:hover .region-img{
+  .region.active .region-img{
     opacity:1;
     transform:translateY(-30px) scale(1.08);
     filter:
@@ -403,24 +403,37 @@
   const tooltip = document.getElementById('tooltip');
   const regions = document.querySelectorAll('.region');
 
+  let active = null;
+
+  function clear() {
+    if (active) active.classList.remove('active');
+    active = null;
+    tooltip.classList.remove('show');
+  }
+
+  function select(region, e) {
+    map.appendChild(region);        // raise above siblings
+    region.classList.add('active');
+    active = region;
+    const { name, sites, orgs } = region.dataset;
+    tooltip.innerHTML = `<b>${name}</b><br>${sites} 個場域建置<br>${orgs} 個被幫助機構`;
+    const rect = wrap.getBoundingClientRect();
+    tooltip.style.left = (e.clientX - rect.left) + 'px';
+    tooltip.style.top = (e.clientY - rect.top) + 'px';
+    tooltip.classList.add('show');
+  }
+
   regions.forEach(region => {
-    region.addEventListener('mouseenter', () => {
-      map.appendChild(region);
-    });
-    region.addEventListener('mousemove', (e) => {
-      const name = region.dataset.name;
-      const sites = region.dataset.sites;
-      const orgs = region.dataset.orgs;
-      tooltip.innerHTML = `<b>${name}</b><br>${sites} 個場域建置<br>${orgs} 個被幫助機構`;
-      const rect = wrap.getBoundingClientRect();
-      tooltip.style.left = (e.clientX - rect.left) + 'px';
-      tooltip.style.top = (e.clientY - rect.top) + 'px';
-      tooltip.classList.add('show');
-    });
-    region.addEventListener('mouseleave', () => {
-      tooltip.classList.remove('show');
+    region.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (region === active) { clear(); return; }   // click again to drop
+      if (active) active.classList.remove('active');
+      select(region, e);
     });
   });
+
+  // click anywhere else clears the selection
+  document.addEventListener('click', clear);
 </script>
 
 </body>
